@@ -1,12 +1,29 @@
-# Arquitectura OpsBackend
+# Arquitectura de OpsBackend
 
 Monolito en capas con dominio desacoplado de frameworks.
 
-```mermaid
-flowchart TD
-UI["UI Layer (CLI Semana 1 -> REST API Semana 3+)"] --> APP["Application Layer (Casos de uso)"]
-APP --> DOM["Domain Layer (Modelos + reglas puras)"]
-APP --> INF["Infrastructure Layer (Persistencia y frameworks)"]
-INF -. "implementa contratos" .-> DOM
-```
-
+```text
+┌─────────────────────────────────────────────┐
+│                   UI LAYER                  │
+│         CLI (Semana 1) → REST API           │
+│   Punto de entrada: recibe input del mundo  │
+└────────────────────┬────────────────────────┘
+                     │ llama a
+┌────────────────────▼────────────────────────┐
+│             APPLICATION LAYER               │
+│   Casos de uso: CreateOrder, PayOrder...    │
+│   Orquesta el flujo, no contiene reglas     │
+└────────────────────┬────────────────────────┘
+                     │ usa
+┌────────────────────▼────────────────────────┐
+│               DOMAIN LAYER                  │
+│   Modelos: Customer, Product, Order...      │
+│   Reglas de negocio puras, sin frameworks   │
+│   Corazón del sistema, estable en el tiempo │
+└────────────────────┬────────────────────────┘
+                     │ implementado por
+┌────────────────────▼────────────────────────┐
+│           INFRASTRUCTURE LAYER              │
+│   Repositorios (memoria → JDBC → JPA)       │
+│   Base de datos, frameworks, mundo exterior │
+└─────────────────────────────────────────────┘
