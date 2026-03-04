@@ -41,6 +41,22 @@ public class Product {
         return active;
     }
 
+
+    public void reduceStock(int quantity) {
+        if (quantity <= 0) throw new IllegalArgumentException("quantity must be greater than zero");
+        if (quantity > this.stock) throw new IllegalArgumentException("insufficient stock");
+        this.stock -= quantity;
+    }
+
+    public void addStock(int quantity) {
+        if (quantity <= 0) throw new IllegalArgumentException("quantity must be greater than zero");
+        this.stock += quantity;
+    }
+
+    public void deactivate() {
+        this.active = false;
+    }
+
     // Validar id
     private static String requireText(String value, String field){
         String text = Objects.requireNonNull(value, field + " is required").trim();

@@ -85,4 +85,67 @@ public class ProductTest {
                 new Product(id, name, description, price, stock)
         );
     }
+
+    @Test
+    void shouldReduceStock() {
+
+        // Arrange
+        Product p = new Product("p1", "Laptop", "Laptop 16GB RAM", 999.99, 10);
+
+        // Act
+        p.reduceStock(3);
+
+        // Assert
+        assertEquals(7, p.getStock());
+    }
+
+    @Test
+    void shouldFailWhenReducingMoreThanAvailableStock() {
+
+        // Arrange
+        Product p = new Product("p1", "Laptop", "Laptop 16GB RAM", 999.99, 5);
+
+        // Act + Assert
+        assertThrows(IllegalArgumentException.class, () ->
+                p.reduceStock(10)
+        );
+    }
+
+    @Test
+    void shouldAddStock() {
+
+        // Arrange
+        Product p = new Product("p1", "Laptop", "Laptop 16GB RAM", 999.99, 10);
+
+        // Act
+        p.addStock(5);
+
+        // Assert
+        assertEquals(15, p.getStock());
+    }
+
+    @Test
+    void shouldFailWhenAddingZeroOrNegativeStock() {
+
+        // Arrange
+        Product p = new Product("p1", "Laptop", "Laptop 16GB RAM", 999.99, 10);
+
+        // Act + Assert
+        assertThrows(IllegalArgumentException.class, () ->
+                p.addStock(0)
+        );
+    }
+
+    @Test
+    void shouldDeactivateProduct() {
+
+        // Arrange
+        Product p = new Product("p1", "Laptop", "Laptop 16GB RAM", 999.99, 10);
+
+        // Act
+        p.deactivate();
+
+        // Assert
+        assertFalse(p.isActive());
+    }
 }
