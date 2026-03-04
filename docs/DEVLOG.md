@@ -29,3 +29,31 @@
 - `feat: validación de nombre mínimo 3 caracteres en Customer`
 - `feat: validación de formato de email en Customer`
 - `feat: comportamiento changeName, changeEmail y deactivate en Customer`
+## Día 2 — Modelo Product
+**Fecha:** 2026-02-21
+**Rama:** feat/day-01-domain-customer
+
+### Qué hicimos
+- Creamos la clase `Product` en `domain/model` con atributos: id, name, description, price, stock, active
+- Implementamos validaciones: id obligatorio, name obligatorio, price mayor a cero, stock no negativo
+- Implementamos comportamiento: reduceStock, addStock, deactivate
+- Creamos `ProductTest` con tests usando TDD — primero rojo, luego verde
+
+### Lo que aprendí
+- `double` necesita delta en `assertEquals` por imprecisión de decimales en binario
+- Un error de compilación (`cannot find symbol`) es diferente a un test fallido — el compilador no encuentra el método, no es que el test falle
+- Stock puede ser cero (agotado) pero price no puede ser cero — cada regla tiene su razón de negocio
+- Las reglas de negocio protegen el sistema de estados inválidos
+
+### Decisiones técnicas
+- **`validatePrice`** — price debe ser mayor a cero, no mayor o igual. Un producto sin precio no tiene sentido en un ERP.
+- **`reduceStock`** valida dos cosas: que la cantidad sea mayor a cero Y que no supere el stock disponible. Dos reglas, dos mensajes de error diferentes.
+- **`addStock`** solo valida que la cantidad sea mayor a cero — no tiene límite superior porque un almacén puede recibir cualquier cantidad.
+- **No hay `setStock(int)`** — el stock solo se modifica a través de `reduceStock` y `addStock`. Así el sistema controla siempre cómo cambia el inventario.
+
+### Commits del día
+- `feat: modelo Product con estructura base y primer test de creación`
+- `feat: validación de id obligatorio en Product`
+- `feat: validación de name y price en Product`
+- `feat: validación de stock no negativo en Product`
+- `feat: comportamiento reduceStock, addStock y deactivate en Product`
