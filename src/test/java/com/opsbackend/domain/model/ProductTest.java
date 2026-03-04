@@ -39,4 +39,34 @@ public class ProductTest {
                 new Product(id, name, description, price, stock)
         );
     }
+
+    @Test
+    void shouldFailWhenNameIsBlank(){
+        // Arrange
+        String id = "p1";
+        String name = " ";
+        String description = "Laptop 16GB RAM";
+        double price = 999.99;
+        int stock = 10;
+
+        // Act + Assert
+        assertThrows(IllegalArgumentException.class, ()->
+                new Product(id, name, description, price, stock)
+        );
+    }
+
+    @Test
+    void shouldFailWhenPriceIsZeroOrNegative(){
+        // Arrange
+        String id = "p1";
+        String name = "Laptop";
+        String description = "Laptop 16GB RAM";
+        double price = 0.0;
+        int stock = 10;
+
+        // Act + Assert
+        assertThrows(IllegalArgumentException.class, ()->
+                new Product(id, name, description, price, stock)
+        );
+    }
 }

@@ -14,9 +14,9 @@ public class Product {
     // Constructor
     public Product(String id, String name, String description, double price, int stock){
         this.id = requireText(id, "id");
-        this.name = name;
+        this.name = requireText(name, "name");
         this.description = description;
-        this.price = price;
+        this.price = validatePrice(price);
         this.stock = stock;
         this.active = true;
     }
@@ -46,5 +46,10 @@ public class Product {
         String text = Objects.requireNonNull(value, field + " is required").trim();
         if(text.isEmpty()) throw new IllegalArgumentException(field + " cannot be blank");
         return text;
+    }
+
+    private static double validatePrice(double value) {
+        if (value <= 0) throw new IllegalArgumentException("price must be greater than zero");
+        return value;
     }
 }
