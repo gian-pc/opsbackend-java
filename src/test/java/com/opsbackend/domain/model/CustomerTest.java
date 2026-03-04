@@ -37,4 +37,18 @@ public class CustomerTest {
                 new Customer(id, name, email)
         );
     }
+
+    @Test
+    void shouldFailWhenNameIsTooShort() {
+
+        // Arrange
+        String id = "c1";
+        String name = "Gi";
+        String email = "gian@mail.com";
+
+        // Act + Assert
+        assertThrows(IllegalArgumentException.class, () ->
+                new Customer(id, name, email)
+        );
+    }
 }

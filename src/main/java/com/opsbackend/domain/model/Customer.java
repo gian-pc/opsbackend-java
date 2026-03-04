@@ -10,7 +10,7 @@ public class Customer {
 
     public Customer(String id, String name, String email) {
         this.id = requireText(id, "id");
-        this.name = name;
+        this.name = validateName(name);
         this.email = email;
         this.active = true;
     }
@@ -32,5 +32,11 @@ public class Customer {
         String text = Objects.requireNonNull(value, field + " is required").trim();
         if (text.isEmpty()) throw new IllegalArgumentException(field + " cannot be blank");
         return text;
+    }
+
+    private static String validateName(String value) {
+        String name = requireText(value, "name");
+        if (name.length() < 3) throw new IllegalArgumentException("name must have at least 3 characters");
+        return name;
     }
 }
