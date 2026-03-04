@@ -28,6 +28,20 @@ public class Customer {
         return active;
     }
 
+
+    public void changeName(String newName) {
+        this.name = validateName(newName);
+    }
+
+    public void changeEmail(String newEmail) {
+        this.email = validateEmail(newEmail);
+    }
+
+    public void deactivate() {
+        this.active = false;
+    }
+
+
     private static String requireText(String value, String field) {
         String text = Objects.requireNonNull(value, field + " is required").trim();
         if (text.isEmpty()) throw new IllegalArgumentException(field + " cannot be blank");

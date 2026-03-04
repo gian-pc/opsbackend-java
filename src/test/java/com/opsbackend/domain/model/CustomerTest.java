@@ -2,8 +2,7 @@ package com.opsbackend.domain.model;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class CustomerTest {
 
@@ -64,5 +63,44 @@ public class CustomerTest {
         assertThrows(IllegalArgumentException.class, () ->
                 new Customer(id, name, email)
         );
+    }
+
+    @Test
+    void shouldChangeName() {
+
+        // Arrange
+        Customer c = new Customer("c1", "Gian Perez", "gian@mail.com");
+
+        // Act
+        c.changeName("Gian PC");
+
+        // Assert
+        assertEquals("Gian PC", c.getName());
+    }
+
+    @Test
+    void shouldChangeEmail() {
+
+        // Arrange
+        Customer c = new Customer("c1", "Gian Perez", "gian@mail.com");
+
+        // Act
+        c.changeEmail("nuevo@mail.com");
+
+        // Assert
+        assertEquals("nuevo@mail.com", c.getEmail());
+    }
+
+    @Test
+    void shouldDeactivateCustomer() {
+
+        // Arrange
+        Customer c = new Customer("c1", "Gian Perez", "gian@mail.com");
+
+        // Act
+        c.deactivate();
+
+        // Assert
+        assertFalse(c.isActive());
     }
 }
