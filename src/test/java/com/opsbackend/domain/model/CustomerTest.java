@@ -23,4 +23,18 @@ public class CustomerTest {
         assertEquals(email, gian.getEmail());
         assertEquals(gian.isActive(), true);
     }
+
+    @Test
+    void shouldFailWhenIdIsBlank() {
+
+        // Arrange
+        String id = "   ";
+        String name = "Gian Perez";
+        String email = "gian@mail.com";
+
+        // Act + Assert
+        assertThrows(IllegalArgumentException.class, () ->
+                new Customer(id, name, email)
+        );
+    }
 }

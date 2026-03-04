@@ -1,5 +1,7 @@
 package com.opsbackend.domain.model;
 
+import java.util.Objects;
+
 public class Customer {
     private final String id;
     private String name;
@@ -7,7 +9,7 @@ public class Customer {
     private boolean active;
 
     public Customer(String id, String name, String email) {
-        this.id = id;
+        this.id = requireText(id, "id");
         this.name = name;
         this.email = email;
         this.active = true;
@@ -26,4 +28,9 @@ public class Customer {
         return active;
     }
 
+    private static String requireText(String value, String field) {
+        String text = Objects.requireNonNull(value, field + " is required").trim();
+        if (text.isEmpty()) throw new IllegalArgumentException(field + " cannot be blank");
+        return text;
+    }
 }
