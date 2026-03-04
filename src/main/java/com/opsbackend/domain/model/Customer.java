@@ -11,7 +11,7 @@ public class Customer {
     public Customer(String id, String name, String email) {
         this.id = requireText(id, "id");
         this.name = validateName(name);
-        this.email = email;
+        this.email = validateEmail(email);
         this.active = true;
     }
 
@@ -38,5 +38,12 @@ public class Customer {
         String name = requireText(value, "name");
         if (name.length() < 3) throw new IllegalArgumentException("name must have at least 3 characters");
         return name;
+    }
+
+    private static String validateEmail(String value) {
+        String email = requireText(value, "email");
+        if (!email.matches("^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$"))
+            throw new IllegalArgumentException("email format is invalid");
+        return email;
     }
 }
