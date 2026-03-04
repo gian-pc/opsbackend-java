@@ -51,4 +51,18 @@ public class CustomerTest {
                 new Customer(id, name, email)
         );
     }
+
+    @Test
+    void shouldFailWhenEmailIsInvalid() {
+
+        // Arrange
+        String id = "c1";
+        String name = "Gian Perez";
+        String email = "correo-invalido";
+
+        // Act + Assert
+        assertThrows(IllegalArgumentException.class, () ->
+                new Customer(id, name, email)
+        );
+    }
 }
