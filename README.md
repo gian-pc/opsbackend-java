@@ -1,29 +1,24 @@
 # OpsBackend
 
-Sistema de gestión de operaciones para aprender Backend Java desde cero.
+Sistema de gestión de operaciones empresariales — Backend Java con arquitectura en capas, PostgreSQL, Spring Boot y Spring Security.
 
-## Objetivo
-
-Construir un monolito en capas con Customers, Products, Orders y Transactions.
-
-## Stack actual (Semana 1)
-
+## Stack
 - Java 17
 - Gradle
-- JUnit 5
-- CLI (interfaz inicial)
+- PostgreSQL + Docker
+- Spring Boot (Semana 3)
+- Spring Security JWT (Semana 4)
 
-## Arquitectura (monolito en capas)
+## Arquitectura
+Monolito en capas: domain / application / infrastructure / ui
 
-- `ui`: entrada/salida (CLI ahora, REST después)
-- `application`: casos de uso y orquestación
-- `domain`: reglas de negocio puras
-- `infrastructure`: persistencia y adaptadores externos
+## Prácticas de desarrollo
+- TDD (Test Driven Development) con JUnit5
+- Conventional Commits
+- Arquitectura en capas desacoplada de frameworks
 
-## Ejecutar validación básica
+## Cómo correr el proyecto
+_Instrucciones próximamente_
 
-`./gradlew test`
-
-## Estado actual
-
-Día 0 en progreso: setup inicial y documentación base.
+## Autor
+Gian — Backend Java Developer
