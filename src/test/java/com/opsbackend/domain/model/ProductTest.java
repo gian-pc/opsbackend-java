@@ -2,12 +2,11 @@ package com.opsbackend.domain.model;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ProductTest {
     @Test
-    void shouldCreateProductWithValidData(){
+    void shouldCreateProductWithValidData() {
         // Arrange
         String id = "p1";
         String name = "Laptop";
@@ -24,7 +23,20 @@ public class ProductTest {
         assertEquals(999.99, p.getPrice(), 0.01);
         assertEquals(10, p.getStock());
         assertTrue(p.isActive());
+    }
 
+    @Test
+    void shouldFailWhenIdIsBlank() {
+        // Arrange
+        String id = "";
+        String name = "Laptop";
+        String description = "Laptop 16GB RAM";
+        double price = 999.99;
+        int stock = 10;
 
+        // Act + Assert
+        assertThrows(IllegalArgumentException.class, () ->
+                new Product(id, name, description, price, stock)
+        );
     }
 }
