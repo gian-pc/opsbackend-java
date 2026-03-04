@@ -69,4 +69,20 @@ public class ProductTest {
                 new Product(id, name, description, price, stock)
         );
     }
+
+    @Test
+    void shouldFailWhenStockIsNegative() {
+
+        // Arrange
+        String id = "p1";
+        String name = "Laptop";
+        String description = "Laptop 16GB RAM";
+        double price = 999.99;
+        int stock = -1;
+
+        // Act + Assert
+        assertThrows(IllegalArgumentException.class, () ->
+                new Product(id, name, description, price, stock)
+        );
+    }
 }

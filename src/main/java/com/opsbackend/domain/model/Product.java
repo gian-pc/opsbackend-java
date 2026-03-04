@@ -17,7 +17,7 @@ public class Product {
         this.name = requireText(name, "name");
         this.description = description;
         this.price = validatePrice(price);
-        this.stock = stock;
+        this.stock = validateStock(stock);
         this.active = true;
     }
 
@@ -50,6 +50,11 @@ public class Product {
 
     private static double validatePrice(double value) {
         if (value <= 0) throw new IllegalArgumentException("price must be greater than zero");
+        return value;
+    }
+
+    private static int validateStock(int value) {
+        if (value < 0) throw new IllegalArgumentException("stock cannot be negative");
         return value;
     }
 }
