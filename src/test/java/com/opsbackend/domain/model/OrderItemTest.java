@@ -24,4 +24,40 @@ class OrderItemTest {
         assertEquals(999.99, item.getUnitPrice(), 0.01);
         assertEquals(2999.97, item.getSubtotal(), 0.01);
     }
+
+    @Test
+    void shouldFailWhenIdIsBlank() {
+
+        // Arrange + Act + Assert
+        assertThrows(IllegalArgumentException.class, () ->
+                new OrderItem("   ", "p1", 3, 999.99)
+        );
+    }
+
+    @Test
+    void shouldFailWhenProductIdIsBlank() {
+
+        // Arrange + Act + Assert
+        assertThrows(IllegalArgumentException.class, () ->
+                new OrderItem("oi1", "   ", 3, 999.99)
+        );
+    }
+
+    @Test
+    void shouldFailWhenQuantityIsZeroOrNegative() {
+
+        // Arrange + Act + Assert
+        assertThrows(IllegalArgumentException.class, () ->
+                new OrderItem("oi1", "p1", 0, 999.99)
+        );
+    }
+
+    @Test
+    void shouldFailWhenUnitPriceIsZeroOrNegative() {
+
+        // Arrange + Act + Assert
+        assertThrows(IllegalArgumentException.class, () ->
+                new OrderItem("oi1", "p1", 3, 0.0)
+        );
+    }
 }

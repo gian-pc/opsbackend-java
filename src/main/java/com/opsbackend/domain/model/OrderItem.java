@@ -1,5 +1,7 @@
 package com.opsbackend.domain.model;
 
+import java.util.Objects;
+
 public class OrderItem {
     private final String id;
     private final String productId;
@@ -8,11 +10,11 @@ public class OrderItem {
     private final double subtotal;
 
     public OrderItem(String id, String productId, int quantity, double unitPrice) {
-        this.id = id;
-        this.productId = productId;
-        this.quantity = quantity;
-        this.unitPrice = unitPrice;
-        this.subtotal = quantity * unitPrice;
+        this.id = requireText(id, "id");
+        this.productId = requireText(productId, "productId");
+        this.quantity = validateQuantity(quantity);
+        this.unitPrice = validateUnitPrice(unitPrice);
+        this.subtotal = this.quantity * this.unitPrice;
     }
 
     public String getId() {
@@ -29,5 +31,21 @@ public class OrderItem {
     }
     public double getSubtotal() {
         return subtotal;
+    }
+
+    private static String requireText(String value, String field) {
+        String text = Objects.requireNonNull(value, field + " is required").trim();
+        if (text.isEmpty()) throw new IllegalArgumentException(field + " cannot be blank");
+        return text;
+    }
+
+    private static int validateQuantity(int value) {
+        if (value <= 0) throw new IllegalArgumentException("quantity must be greater than zero");
+        return value;
+    }
+
+    private static double validateUnitPrice(double value) {
+        if (value <= 0) throw new IllegalArgumentException("unitPrice must be greater than zero");
+        return value;
     }
 }
