@@ -35,4 +35,12 @@ public class Order {
         if (text.isEmpty()) throw new IllegalArgumentException(field + " cannot be blank");
         return text;
     }
+
+    public void addItem(OrderItem item) {
+        if (item == null) throw new IllegalArgumentException("item cannot be null");
+        this.items.add(item);
+        this.total = this.items.stream()
+                .mapToDouble(OrderItem::getSubtotal)
+                .sum();
+    }
 }

@@ -41,4 +41,21 @@ class OrderTest {
                 new Order("o1", "   ")
         );
     }
+
+    @Test
+    void shouldAddItemAndRecalculateTotal() {
+
+        // Arrange
+        Order order = new Order("o1", "c1");
+        OrderItem item1 = new OrderItem("oi1", "p1", 2, 100.00);
+        OrderItem item2 = new OrderItem("oi2", "p2", 1, 50.00);
+
+        // Act
+        order.addItem(item1);
+        order.addItem(item2);
+
+        // Assert
+        assertEquals(2, order.getItems().size());
+        assertEquals(250.00, order.getTotal(), 0.01);
+    }
 }
