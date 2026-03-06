@@ -57,3 +57,35 @@
 - `feat: validación de name y price en Product`
 - `feat: validación de stock no negativo en Product`
 - `feat: comportamiento reduceStock, addStock y deactivate en Product`
+## Día 3 — Modelos Order y OrderItem
+**Fecha:** 2026-03-04
+**Rama:** feat/day-01-domain-customer
+
+### Qué hicimos
+- Creamos `OrderItem` con atributos inmutables y cálculo automático de subtotal
+- Creamos enum `OrderStatus` con valores: PENDING, CONFIRMED, CANCELLED, DELIVERED
+- Creamos `Order` con lista de items, cálculo automático de total y transiciones de status
+- Implementamos TDD en todas las clases — primero rojo, luego verde
+
+### Lo que aprendí
+- `List<OrderItem>` — cómo guardar una colección de objetos en Java
+- `ArrayList` — implementación de List que crece automáticamente
+- Enum — lista fija de valores permitidos, más seguro que String para estados
+- `LocalDateTime` — tipo de dato para fechas y horas en Java moderno
+- `assertNotNull` — verifica que un valor no sea null sin importar su valor exacto
+- Streams — forma moderna de procesar listas: `.stream().mapToDouble().sum()`
+- `IllegalStateException` vs `IllegalArgumentException` — errores de estado vs errores de datos
+
+### Decisiones técnicas
+- **Todos los atributos de OrderItem son `final`** — un item registrado no se modifica. Si hay error se cancela la orden y se crea una nueva.
+- **`total` se recalcula en `addItem`** — nunca se ingresa a mano. Es una regla de negocio que el sistema controla.
+- **Transiciones de status tienen reglas** — DELIVERED y CANCELLED son estados finales. No puedes confirmar una orden cancelada ni cancelar una entregada.
+- **Enum para OrderStatus** — evita valores inválidos como "pending", "PENDIENTE" o typos.
+
+### Commits del día
+- `feat: modelo OrderItem con estructura base y cálculo de subtotal`
+- `feat: validaciones de id, productId, quantity y unitPrice en OrderItem`
+- `feat: modelo Order con estructura base, OrderStatus enum y primer test`
+- `feat: validaciones de id y customerId en Order`
+- `feat: comportamiento addItem y cálculo automático de total en Order`
+- `feat: cambio de status con reglas de transición en Order`
