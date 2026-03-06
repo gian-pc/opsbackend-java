@@ -43,4 +43,24 @@ public class Order {
                 .mapToDouble(OrderItem::getSubtotal)
                 .sum();
     }
+
+    public void confirm() {
+        if (this.status != OrderStatus.PENDING)
+            throw new IllegalStateException("only PENDING orders can be confirmed");
+        this.status = OrderStatus.CONFIRMED;
+    }
+
+    public void cancel() {
+        if (this.status == OrderStatus.DELIVERED)
+            throw new IllegalStateException("delivered orders cannot be cancelled");
+        if (this.status == OrderStatus.CANCELLED)
+            throw new IllegalStateException("order is already cancelled");
+        this.status = OrderStatus.CANCELLED;
+    }
+
+    public void deliver() {
+        if (this.status != OrderStatus.CONFIRMED)
+            throw new IllegalStateException("only CONFIRMED orders can be delivered");
+        this.status = OrderStatus.DELIVERED;
+    }
 }

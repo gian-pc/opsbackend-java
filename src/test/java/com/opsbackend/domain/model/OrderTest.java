@@ -58,4 +58,57 @@ class OrderTest {
         assertEquals(2, order.getItems().size());
         assertEquals(250.00, order.getTotal(), 0.01);
     }
+
+    @Test
+    void shouldConfirmOrder() {
+
+        // Arrange
+        Order order = new Order("o1", "c1");
+
+        // Act
+        order.confirm();
+
+        // Assert
+        assertEquals(OrderStatus.CONFIRMED, order.getStatus());
+    }
+
+    @Test
+    void shouldCancelOrder() {
+
+        // Arrange
+        Order order = new Order("o1", "c1");
+
+        // Act
+        order.cancel();
+
+        // Assert
+        assertEquals(OrderStatus.CANCELLED, order.getStatus());
+    }
+
+    @Test
+    void shouldDeliverOrder() {
+
+        // Arrange
+        Order order = new Order("o1", "c1");
+        order.confirm();
+
+        // Act
+        order.deliver();
+
+        // Assert
+        assertEquals(OrderStatus.DELIVERED, order.getStatus());
+    }
+
+    @Test
+    void shouldFailWhenConfirmingCancelledOrder() {
+
+        // Arrange
+        Order order = new Order("o1", "c1");
+        order.cancel();
+
+        // Act + Assert
+        assertThrows(IllegalStateException.class, () ->
+                order.confirm()
+        );
+    }
 }
