@@ -3,6 +3,7 @@ package com.opsbackend.domain.model;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Order {
 
@@ -14,8 +15,8 @@ public class Order {
     private final List<OrderItem> items;
 
     public Order(String id, String customerId) {
-        this.id = id;
-        this.customerId = customerId;
+        this.id = requireText(id, "id");
+        this.customerId = requireText(customerId, "customerId");
         this.status = OrderStatus.PENDING;
         this.total = 0.0;
         this.createdAt = LocalDateTime.now();
@@ -28,4 +29,10 @@ public class Order {
     public double getTotal()         { return total; }
     public LocalDateTime getCreatedAt() { return createdAt; }
     public List<OrderItem> getItems() { return items; }
+
+    private static String requireText(String value, String field) {
+        String text = Objects.requireNonNull(value, field + " is required").trim();
+        if (text.isEmpty()) throw new IllegalArgumentException(field + " cannot be blank");
+        return text;
+    }
 }

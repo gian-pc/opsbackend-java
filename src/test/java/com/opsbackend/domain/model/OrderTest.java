@@ -23,4 +23,22 @@ class OrderTest {
         assertNotNull(order.getCreatedAt());
         assertTrue(order.getItems().isEmpty());
     }
+
+    @Test
+    void shouldFailWhenIdIsBlank() {
+
+        // Arrange + Act + Assert
+        assertThrows(IllegalArgumentException.class, () ->
+                new Order("   ", "c1")
+        );
+    }
+
+    @Test
+    void shouldFailWhenCustomerIdIsBlank() {
+
+        // Arrange + Act + Assert
+        assertThrows(IllegalArgumentException.class, () ->
+                new Order("o1", "   ")
+        );
+    }
 }
