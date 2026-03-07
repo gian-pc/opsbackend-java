@@ -89,3 +89,33 @@
 - `feat: validaciones de id y customerId en Order`
 - `feat: comportamiento addItem y cálculo automático de total en Order`
 - `feat: cambio de status con reglas de transición en Order`
+
+## Día 4 — Modelo Transaction
+**Fecha:** 2026-03-07
+**Rama:** feat/day-04-domain-transaction
+
+### Qué hicimos
+- Creamos enum `TransactionStatus` con valores: PENDING, APPROVED, REJECTED
+- Creamos clase `Transaction` completamente inmutable
+- Validaciones: id, orderId obligatorios, amount mayor a cero, status no null
+- Tests con TDD cubriendo todos los casos
+
+### Lo que aprendí
+- Inmutabilidad: objeto que no cambia después de crearse, se logra con private final y sin setters
+- NullPointerException vs IllegalArgumentException — NPE es referencia null, IAE es valor inválido
+- requireNonNull para enums, requireText para Strings
+- Transaction es inmutable porque una transacción registrada no se modifica — si falla se crea una nueva
+
+### Decisiones técnicas
+- **Transaction completamente inmutable** — representa un hecho registrado en el sistema. Los hechos no se modifican.
+- **TransactionStatus como enum** — type safety, el compilador impide valores inválidos.
+- **requireNonNull para status** — lanza NullPointerException estándar de Java, no IllegalArgumentException.
+
+### Preguntas de entrevista
+- ¿Qué es un objeto inmutable y cómo lo implementas?
+- ¿Diferencia entre NullPointerException e IllegalArgumentException?
+- ¿Por qué enum sobre String para estados?
+
+### Commits del día
+- feat: modelo Transaction con estructura base y primer test
+- feat: validaciones de id, orderId, amount y status en Transaction
