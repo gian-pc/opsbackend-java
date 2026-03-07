@@ -24,4 +24,40 @@ class TransactionTest {
         assertEquals(TransactionStatus.PENDING, t.getStatus());
         assertNotNull(t.getCreatedAt());
     }
+
+    @Test
+    void shouldFailWhenIdIsBlank() {
+
+        // Arrange + Act + Assert
+        assertThrows(IllegalArgumentException.class, () ->
+                new Transaction("   ", "o1", 500.00, TransactionStatus.PENDING)
+        );
+    }
+
+    @Test
+    void shouldFailWhenOrderIdIsBlank() {
+
+        // Arrange + Act + Assert
+        assertThrows(IllegalArgumentException.class, () ->
+                new Transaction("t1", "   ", 500.00, TransactionStatus.PENDING)
+        );
+    }
+
+    @Test
+    void shouldFailWhenAmountIsZeroOrNegative() {
+
+        // Arrange + Act + Assert
+        assertThrows(IllegalArgumentException.class, () ->
+                new Transaction("t1", "o1", 0.0, TransactionStatus.PENDING)
+        );
+    }
+
+    @Test
+    void shouldFailWhenStatusIsNull() {
+
+        // Arrange + Act + Assert
+        assertThrows(NullPointerException.class, () ->
+                new Transaction("t1", "o1", 500.00, null)
+        );
+    }
 }
