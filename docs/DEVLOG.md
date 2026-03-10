@@ -152,3 +152,34 @@
 - feat: implementaciones en memoria de los tres repositorios
 - test: tests de InMemoryCustomerRepository
 - test: tests de InMemoryProductRepository y InMemoryOrderRepository
+
+## Día 6 — Casos de uso + CLI
+**Fecha:** 2026-03-10
+**Rama:** feat/day-06-usecases-cli
+
+### Qué hicimos
+- Creamos casos de uso: CreateCustomerUseCase, GetCustomerUseCase, CreateOrderUseCase
+- Creamos MainCLI que conecta todas las capas de punta a punta
+- Actualizamos ARCHITECTURE.md con diagrama de flujo de operación completa
+
+### Lo que aprendí
+- Caso de uso — orquesta el flujo, no contiene reglas de negocio
+- Inyección de dependencias — el caso de uso recibe la interfaz, no la implementación
+- UUID — identificador único universal generado automáticamente
+- .orElseThrow() — extrae el valor de un Optional o lanza excepción si está vacío
+- La CLI es el único lugar que conoce las implementaciones concretas — ensambla todas las piezas
+
+### Decisiones técnicas
+- **Casos de uso reciben interfaces** — desacoplados de la implementación. En Semana 3 Spring inyectará las dependencias automáticamente.
+- **UUID para ids de Order** — generado automáticamente, nunca se repite, no necesita base de datos para garantizar unicidad.
+- **CLI ensambla las piezas** — crea repositorios concretos y los inyecta en los casos de uso. En Spring esto lo hace el contenedor de IoC.
+
+### Preguntas
+- ¿Qué es inyección de dependencias?
+- ¿Qué hace .orElseThrow()?
+- ¿Por qué el caso de uso recibe una interfaz y no una implementación concreta?
+
+### Commits del día
+- feat: casos de uso CreateCustomer y GetCustomer con tests
+- feat: caso de uso CreateOrder con validación de cliente existente
+- feat: CLI que conecta casos de uso con repositorios en memoria
