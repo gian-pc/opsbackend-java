@@ -119,3 +119,36 @@
 ### Commits del día
 - feat: modelo Transaction con estructura base y primer test
 - feat: validaciones de id, orderId, amount y status en Transaction
+
+## Día 5 — Repositorios en memoria
+**Fecha:** 2026-03-09
+**Rama:** feat/day-05-repositories-inmemory
+
+### Qué hicimos
+- Creamos interfaces de repositorio en domain/repository: CustomerRepository, ProductRepository, OrderRepository
+- Creamos implementaciones en memoria en infrastructure/persistence/inmemory
+- Testeamos todos los repositorios con TDD
+
+### Lo que aprendí
+- Interfaz en Java — define el contrato (qué), la implementación define el cómo
+- Optional — contenedor que puede tener un valor o estar vacío, evita NullPointerException
+- Map vs List — Map permite buscar por clave en O(1), List requiere recorrer todos los elementos O(n)
+- @BeforeEach — se ejecuta antes de cada test, garantiza que cada test arranca limpio
+- Streams — forma moderna de procesar colecciones: filter, map, collect
+- HashMap — implementación de Map que guarda pares clave-valor sin orden
+
+### Decisiones técnicas
+- **Interfaces en domain, implementaciones en infrastructure** — el dominio define el contrato sin saber cómo se implementa. En Semana 2 reemplazamos InMemory por JDBC sin tocar el dominio.
+- **Map<String, Customer> como store** — buscar por id en O(1) es más eficiente que recorrer una List.
+- **Optional en findById** — comunica explícitamente que el resultado puede no existir. Obliga al llamador a manejar el caso vacío.
+
+### Preguntas de entrevista
+- ¿Qué es una interfaz en Java y para qué sirve?
+- ¿Qué es Optional y por qué es mejor que retornar null?
+- ¿Diferencia entre Map y List?
+
+### Commits del día
+- feat: interfaces de repositorio para Customer, Product y Order
+- feat: implementaciones en memoria de los tres repositorios
+- test: tests de InMemoryCustomerRepository
+- test: tests de InMemoryProductRepository y InMemoryOrderRepository
