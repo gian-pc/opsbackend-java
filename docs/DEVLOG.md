@@ -142,7 +142,7 @@
 - **Map<String, Customer> como store** — buscar por id en O(1) es más eficiente que recorrer una List.
 - **Optional en findById** — comunica explícitamente que el resultado puede no existir. Obliga al llamador a manejar el caso vacío.
 
-### Preguntas de entrevista
+### Preguntas
 - ¿Qué es una interfaz en Java y para qué sirve?
 - ¿Qué es Optional y por qué es mejor que retornar null?
 - ¿Diferencia entre Map y List?
