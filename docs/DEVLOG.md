@@ -183,3 +183,32 @@
 - feat: casos de uso CreateCustomer y GetCustomer con tests
 - feat: caso de uso CreateOrder con validación de cliente existente
 - feat: CLI que conecta casos de uso con repositorios en memoria
+
+## Día 8 — Docker + PostgreSQL
+**Fecha:** 2026-03-13
+**Rama:** feat/day-08-docker-postgresql
+
+### Qué hicimos
+- Creamos docker-compose.yml con PostgreSQL 16 Alpine
+- Levantamos la base de datos con docker compose up -d
+- Verificamos la conexión con psql desde dentro del contenedor
+
+### Lo que aprendí
+- Docker — corre aplicaciones en contenedores aislados y reproducibles
+- Docker Compose — define múltiples contenedores en un archivo, los levanta con un comando
+- `docker exec -it` — ejecuta comandos dentro de un contenedor en ejecución
+- `psql` — cliente de línea de comandos de PostgreSQL
+- Alpine — versión ligera de Linux, reduce el peso de la imagen de ~400MB a ~230MB
+
+### Decisiones técnicas
+- **postgres:16-alpine** sobre postgres:16 — mismo rendimiento para desarrollo local, menos peso y arranque más rápido.
+- **Volumen `postgres_data`** — persiste los datos aunque el contenedor se detenga o se reinicie.
+- **Puerto 5432:5432** — expone el puerto del contenedor al puerto local, permite conectarse desde IntelliJ o cualquier cliente SQL.
+
+### Preguntas
+- ¿Qué es Docker y qué problema resuelve?
+- ¿Diferencia entre Docker y Docker Compose?
+- ¿Qué hace `docker exec -it`?
+
+### Commits del día
+- feat: PostgreSQL 16 Alpine con Docker Compose para desarrollo local
