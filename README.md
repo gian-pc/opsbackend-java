@@ -1,56 +1,66 @@
 # OpsBackend
 
-Sistema de gestión de operaciones empresariales — Backend Java con arquitectura
-en capas, PostgreSQL, Spring Boot y Spring Security.
+Backend Java para gestión de operaciones empresariales — clientes, productos,
+órdenes y pagos. Arquitectura en capas diseñada para escalar a microservicios.
 
-## ¿Qué hace este sistema?
-Gestión completa de operaciones de negocio:
-- Clientes (alta, baja, modificación)
-- Productos (inventario, stock)
-- Órdenes (creación, estados, items)
-- Transacciones y pagos (validaciones, auditoría)
+## Stack
 
-## Stack tecnológico
 | Tecnología | Uso |
 |---|---|
 | Java 17 | Lenguaje principal |
 | Gradle | Build y dependencias |
-| PostgreSQL + Docker | Base de datos (Semana 2) |
-| Spring Boot | API REST (Semana 3) |
-| Spring Security + JWT | Autenticación (Semana 4) |
-| JUnit5 | Testing |
-| GitHub Actions | CI/CD (Semana 4) |
+| PostgreSQL + Docker | Base de datos |
+| Spring Boot | API REST |
+| Spring Security + JWT | Autenticación y autorización |
+| JUnit5 + Mockito | Testing unitario e integración |
+| Testcontainers | Tests con base de datos real |
+| GitHub Actions | CI/CD |
 
 ## Arquitectura
-Monolito en capas desacoplado de frameworks:
-- **domain** — modelos y reglas de negocio puras
-- **application** — casos de uso y orquestación
-- **infrastructure** — repositorios e implementaciones
-- **ui** — CLI (Semana 1) → REST API (Semana 3)
 
-Ver diagrama completo en [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)
+Monolito en capas con dominio desacoplado de frameworks. Cada capa tiene una
+responsabilidad clara:
 
-## Estado actual
+- `domain` — modelos y reglas de negocio puras, sin dependencias externas
+- `application` — casos de uso que orquestan el flujo
+- `infrastructure` — repositorios, base de datos, frameworks
+- `ui` — CLI en Semana 1, REST API desde Semana 3
+
+La separación permite reemplazar cualquier implementación de infraestructura
+sin tocar el dominio. En la Semana 2, los repositorios en memoria se reemplazan
+por JDBC sin modificar una sola línea de lógica de negocio.
+
+Ver diagrama y modelo ER en [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)
+
+## Progreso
+
 - [x] Semana 1 — Dominio puro en Java
-    - [x] Modelos: Customer, Product, Order, OrderItem, Transaction
-    - [x] Repositorios en memoria
-    - [x] Casos de uso: CreateCustomer, CreateOrder
-    - [x] CLI funcional
-- [ ] Semana 2 — PostgreSQL + Docker + JDBC
-- [ ] Semana 3 — Spring Boot + REST + JPA
-- [ ] Semana 4 — Security + Docker Compose + CI/CD
+  - [x] Modelos: Customer, Product, Order, OrderItem, Transaction
+  - [x] Validaciones y reglas de negocio en cada modelo
+  - [x] Repositorios: interfaces en domain, implementaciones en memoria
+  - [x] Casos de uso: CreateCustomer, CreateOrder
+  - [x] CLI que conecta todas las capas
+- [ ] Semana 2 — PostgreSQL + Docker + JDBC + Flyway
+- [ ] Semana 3 — Spring Boot + REST + JPA + Swagger
+- [ ] Semana 4 — Spring Security + Docker Compose + GitHub Actions
 - [ ] Semana 5 — Frontend Angular
 
-## Prácticas de desarrollo
-- TDD con JUnit5
-- Conventional Commits
-- Ramas por feature
-- Documentación técnica en /docs
-
-## Cómo correr el proyecto
+## Cómo correr
 ```bash
+# Correr tests
 ./gradlew test
+
+# Correr la CLI (Semana 1)
+./gradlew run
 ```
 
+## Decisiones de diseño
+
+- **TDD estricto** — cada clase tiene su test antes de la implementación
+- **Conventional Commits** — historial limpio y legible
+- **Ramas por feature** — una rama por día de desarrollo
+- **DEVLOG** — decisiones técnicas documentadas en [docs/DEVLOG.md](docs/DEVLOG.md)
+
 ## Autor
-gianpc — Backend Java Developer
+
+[gianpc](https://github.com/gian-pc) — Backend Java Developer
