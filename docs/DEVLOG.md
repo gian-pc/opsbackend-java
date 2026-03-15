@@ -212,3 +212,37 @@
 
 ### Commits del día
 - feat: PostgreSQL 16 Alpine con Docker Compose para desarrollo local
+
+## Día 9 — SQL real + Flyway migrations
+**Fecha:** 2026-03-14
+**Rama:** feat/day-09-sql-schema
+
+### Qué hicimos
+- Creamos V1__create_tables.sql con las 5 tablas del sistema
+- Configuramos Flyway para versionar el schema
+- Ejecutamos la migración y verificamos las tablas en psql
+- Conectamos IntelliJ Ultimate a PostgreSQL como cliente visual
+
+### Lo que aprendí
+- DDL vs DML — DDL define estructura (CREATE TABLE), DML manipula datos (INSERT, SELECT)
+- PRIMARY KEY — identifica únicamente cada fila, no puede ser null ni repetirse
+- FOREIGN KEY / REFERENCES — garantiza integridad referencial entre tablas
+- UNIQUE — no permite valores duplicados en esa columna
+- DECIMAL(10,2) vs FLOAT — DECIMAL es exacto, FLOAT tiene errores de precisión. Para dinero siempre DECIMAL
+- Flyway — versiona el schema igual que Git versiona el código. Cada archivo SQL es una versión
+- `flyway_schema_history` — tabla interna que Flyway usa para saber qué migraciones ya ejecutó
+- `\dt` — lista tablas en psql. `\d tabla` — describe la estructura de una tabla
+
+### Decisiones técnicas
+- **Flyway programático en vez de plugin Gradle** — el plugin de Flyway no es compatible con Gradle 9. La clase DatabaseMigration es temporal — en Semana 3 Spring Boot ejecutará Flyway automáticamente al arrancar.
+- **postgres:16-alpine** — más ligero para desarrollo local, misma funcionalidad.
+- **VARCHAR(36) para ids** — tamaño exacto para UUIDs (formato: 550e8400-e29b-41d4-a716-446655440000).
+- **flyway.conf en raíz** — centraliza la configuración de conexión. En Semana 3 esto pasa a application.yml de Spring Boot.
+
+### Preguntas
+- ¿Qué es una Foreign Key y para qué sirve?
+- ¿Diferencia entre DECIMAL y FLOAT?
+- ¿Qué hace Flyway y por qué es mejor que ejecutar SQL manualmente?
+
+### Commits del día
+- feat: schema de base de datos con Flyway y tablas iniciales
