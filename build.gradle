@@ -19,6 +19,9 @@ dependencies {
 
     // Flyway
     implementation 'org.flywaydb:flyway-core:9.22.3'
+
+    // Connection pool
+    implementation 'com.zaxxer:HikariCP:5.1.0'
 }
 
 test {

@@ -8,6 +8,7 @@ public class Customer {
     private String email;
     private boolean active;
 
+    // Constructor de mi objeto cliente aplicando validaciones
     public Customer(String id, String name, String email) {
         this.id = requireText(id, "id");
         this.name = validateName(name);
@@ -28,11 +29,12 @@ public class Customer {
         return active;
     }
 
-
+    // Metodos para cambiar el estado del cliente, pero validando el formato del nombre
     public void changeName(String newName) {
         this.name = validateName(newName);
     }
 
+    // Metodos para cambiar el estado del cliente, pero validando el formato del email
     public void changeEmail(String newEmail) {
         this.email = validateEmail(newEmail);
     }
@@ -50,7 +52,7 @@ public class Customer {
 
     private static String validateName(String value) {
         String name = requireText(value, "name");
-        if (name.length() < 3) throw new IllegalArgumentException("name must have at least 3 characters");
+        if (name.length() < 3) throw new IllegalArgumentException("El nombre debe tener al menos 3 caracteres");
         return name;
     }
 
