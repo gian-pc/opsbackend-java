@@ -10,7 +10,7 @@ public class CustomerTest {
     void shouldCreateCustomerWithValidData(){
         // Arrange - preparamos los datos
         String id = "c1";
-        String name = "Gian Paucar";
+        String name = "Gian";
         String email = "gpaucarcortez@gmail.com";
 
         // Act - ejecutamos la acción
