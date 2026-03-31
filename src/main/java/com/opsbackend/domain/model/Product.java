@@ -12,7 +12,7 @@ public class Product {
     private boolean active;
 
     // Constructor
-    public Product(String id, String name, String description, double price, int stock){
+    public Product(String id, String name, String description, double price, int stock) {
         this.id = requireText(id, "id");
         this.name = requireText(name, "name");
         this.description = description;
@@ -21,35 +21,52 @@ public class Product {
         this.active = true;
     }
 
-    // Métodos
+    // Getters
     public String getId() {
         return id;
     }
+
     public String getName() {
         return name;
     }
+
     public String getDescription() {
         return description;
     }
+
     public double getPrice() {
         return price;
     }
+
     public int getStock() {
         return stock;
     }
+
     public boolean isActive() {
         return active;
     }
 
+    // Setters
+    public void changeName(String newName) {
+        this.name = requireText(newName, "name");
+    }
+
+    public void changeDescription(String newDescription) {
+        this.description = newDescription;
+    }
+
+    public void changePrice(double newPrice) {
+        this.price = validatePrice(newPrice);
+    }
 
     public void reduceStock(int quantity) {
-        if (quantity <= 0) throw new IllegalArgumentException("quantity must be greater than zero");
-        if (quantity > this.stock) throw new IllegalArgumentException("insufficient stock");
+        if (quantity <= 0) throw new IllegalArgumentException("La cantidad debe ser mayor a cero");
+        if (quantity > this.stock) throw new IllegalArgumentException("Stock insuficiente");
         this.stock -= quantity;
     }
 
     public void addStock(int quantity) {
-        if (quantity <= 0) throw new IllegalArgumentException("quantity must be greater than zero");
+        if (quantity <= 0) throw new IllegalArgumentException("La cantidad debe ser mayor a cero");
         this.stock += quantity;
     }
 
@@ -57,20 +74,20 @@ public class Product {
         this.active = false;
     }
 
-    // Validar id
-    private static String requireText(String value, String field){
-        String text = Objects.requireNonNull(value, field + " is required").trim();
-        if(text.isEmpty()) throw new IllegalArgumentException(field + " cannot be blank");
+    // Métodos de validaciones
+    private static String requireText(String value, String field) {
+        String text = Objects.requireNonNull(value, field + " es requerido").trim();
+        if (text.isEmpty()) throw new IllegalArgumentException(field + " no puede estar vacío");
         return text;
     }
 
-    private static double validatePrice(double value) {
-        if (value <= 0) throw new IllegalArgumentException("price must be greater than zero");
-        return value;
+    private static double validatePrice(double price) {
+        if (price <= 0) throw new IllegalArgumentException("el precio debe ser mayor que cero");
+        return price;
     }
 
-    private static int validateStock(int value) {
-        if (value < 0) throw new IllegalArgumentException("stock cannot be negative");
-        return value;
+    private static int validateStock(int stock) {
+        if (stock < 0) throw new IllegalArgumentException("el stock no puede ser negativo");
+        return stock;
     }
 }
