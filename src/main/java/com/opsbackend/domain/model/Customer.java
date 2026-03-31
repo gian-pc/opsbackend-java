@@ -44,7 +44,15 @@ public class Customer {
     }
 
 
+    /**
+     * @param value el valor a validar
+     * @param field el nombre del campo, usado en el mensaje de error
+     * @return el valor limpio sin espacios al inicio ni al final
+     * @throws NullPointerException si value es null
+     * @throws IllegalArgumentException si value está vacío o solo tiene espacios
+     */
     private static String requireText(String value, String field) {
+
         String text = Objects.requireNonNull(value, field + " is required").trim();
         if (text.isEmpty()) throw new IllegalArgumentException(field + " cannot be blank");
         return text;
