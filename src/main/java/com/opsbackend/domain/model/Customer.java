@@ -29,12 +29,12 @@ public class Customer {
         return active;
     }
 
-    // Metodos para cambiar el estado del cliente, pero validando el formato del nombre
+    // Métodos para cambiar el estado del cliente, pero validando el formato del nombre
     public void changeName(String newName) {
         this.name = validateName(newName);
     }
 
-    // Metodos para cambiar el estado del cliente, pero validando el formato del email
+    // Métodos para cambiar el estado del cliente, pero validando el formato del email
     public void changeEmail(String newEmail) {
         this.email = validateEmail(newEmail);
     }
