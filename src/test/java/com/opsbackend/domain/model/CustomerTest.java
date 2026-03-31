@@ -20,7 +20,7 @@ public class CustomerTest {
         assertEquals(id, gian.getId());
         assertEquals(name, gian.getName());
         assertEquals(email, gian.getEmail());
-        assertEquals(gian.isActive(), true);
+        assertTrue(gian.isActive());
     }
 
     @Test
