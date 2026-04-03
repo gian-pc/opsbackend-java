@@ -40,7 +40,7 @@ Ver diagrama y modelo ER en [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)
   - [x] Repositorios: interfaces en domain, implementaciones en memoria
   - [x] Casos de uso: CreateCustomer, CreateOrder
   - [x] CLI que conecta todas las capas
-- [ ] Semana 2 — PostgreSQL + Docker + JDBC + Flyway
+- [x] Semana 2 — PostgreSQL + Docker + JDBC + Flyway
 - [ ] Semana 3 — Spring Boot + REST + JPA + Swagger
 - [ ] Semana 4 — Spring Security + Docker Compose + GitHub Actions
 - [ ] Semana 5 — Frontend Angular
