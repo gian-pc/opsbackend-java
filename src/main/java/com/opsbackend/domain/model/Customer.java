@@ -53,8 +53,8 @@ public class Customer {
      */
     private static String requireText(String value, String field) {
 
-        String text = Objects.requireNonNull(value, field + " is required").trim();
-        if (text.isEmpty()) throw new IllegalArgumentException(field + " cannot be blank");
+        String text = Objects.requireNonNull(value, field + " es requerido").trim();
+        if (text.isEmpty()) throw new IllegalArgumentException(field + " no puede estar vacío");
         return text;
     }
 
@@ -67,7 +67,7 @@ public class Customer {
     private static String validateEmail(String value) {
         String email = requireText(value, "email");
         if (!email.matches("^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$"))
-            throw new IllegalArgumentException("email format is invalid");
+            throw new IllegalArgumentException("El formato del email es inválido");
         return email;
     }
 }
